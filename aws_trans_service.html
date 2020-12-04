@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>번역웹사이트</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="col">
+        <div class="col align-self-center">
+          <form action="javascript:void(0)">
+            <div class="form-group">
+              <label for="textInputKo"
+                >𝑲𝒐 → 𝑬𝒏 𝑻𝒓𝒂𝒏𝒔𝒍𝒂𝒕𝒆 𝑺𝒆𝒓𝒗𝒊𝒄𝒆</label
+              >
+              <textarea
+                class="form-control"
+                id="textInputKo"
+                rows="3"
+              ></textarea>
+            </div>
+            <button
+              onclick="sendReqeustKo()"
+              class="btn btn-primary btn-lg btn-block"
+            >
+              𝐒𝐮𝐛𝐦𝐢𝐭
+            </button>
+          </form>
+          <hr />
+          <div class="card">
+            <div class="card-body">
+              <p id="resultTextKo"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col align-self-center">
+          <form action="javascript:void(0)">
+            <div class="form-group">
+              <label for="textInputEn"
+                >𝑬𝒏 → 𝑲𝒐 𝑻𝒓𝒂𝒏𝒔𝒍𝒂𝒕𝒆 𝑺𝒆𝒓𝒗𝒊𝒄𝒆</label
+              >
+              <textarea
+                class="form-control"
+                id="textInputEn"
+                rows="3"
+              ></textarea>
+            </div>
+            <button
+              onclick="sendReqeustEn()"
+              class="btn btn-primary btn-lg btn-block"
+            >
+              𝐒𝐮𝐛𝐦𝐢𝐭
+            </button>
+          </form>
+          <hr />
+          <div class="card">
+            <div class="card-body">
+              <p id="resultTextEn"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const inputSelectorKo = document.querySelector("#textInputKo");
+    const resultTextKo = document.querySelector("#resultTextKo");
+    const inputSelectorEn = document.querySelector("#textInputEn");
+    const resultTextEn = document.querySelector("#resultTextEn");
+    const sendReqeustKo = () => {
+      resultTextKo.innerHTML = "𝐿𝑜𝑎𝑑𝑖𝑛𝑔...";
+      fetch(
+        "https://awz3uz73m6.execute-api.us-east-1.amazonaws.com/default/ko_en",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            text: inputSelectorKo.value,
+          }),
+        }
+      ).then((res) => {
+        return res.text().then((text) => {
+          resultTextKo.innerHTML = text;
+        });
+      });
+    };
+    const sendReqeustEn = () => {
+      resultTextEn.innerHTML = "𝐿𝑜𝑎𝑑𝑖𝑛𝑔...";
+      fetch(
+        "https://mx562o9mkg.execute-api.us-east-1.amazonaws.com/default/en-ko",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            text: inputSelectorEn.value,
+          }),
+        }
+      ).then((res) => {
+        return res.text().then((text) => {
+          resultTextEn.innerHTML = text;
+        });
+      });
+    };
+  </script>
+</html>
