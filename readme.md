@@ -1,3 +1,5 @@
-#AWS_study
+# AWS_study
+🌳 Studying and recording "AWS"
 
-This is a repository of studying and recording "AWS".
+# Commit Rule<br>
+🌳 git commit -m "What_I_studied"
